@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<package name="mybatis" extends="struts-default" namespace="/user">
+		<global-results>
+			<result name="error">/login.jsp</result>
+			<result name="page" type="redirect">/regist.jsp</result>
+		</global-results>
+		<action name="UserAction_*" class="com.ems.struts2.UserActionManager" method="{1}">
+			<result name="registOk">/login.jsp</result>
+			<result name="loginOk" type="redirectAction">
+				<param name="namespace">/person</param>
+				<param name="actionName">person_showAll</param>
+			</result>
+		</action>
+		<action name="yzm" class="com.ems.struts2.ValibationCodeAction"></action>
+	</package>
+	
+	<package name="person" extends="struts-default" namespace="/person">
+		<action name="person_*" class="com.ems.struts2.PersonActionManager" method="{1}">
+			<result name="showAllOk">/emplist.jsp</result>
+			<result name="delOk" type="redirectAction">person_showAll</result>
+			<result name="updateOk" type="redirectAction">person_showAll</result>
+			<result name="addOk" type="redirectAction">person_showAll</result>
+		</action>
+	</package>
+</struts>

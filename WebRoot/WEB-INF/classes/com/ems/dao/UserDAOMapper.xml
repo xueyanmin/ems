@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ems.dao.UserDAO">
+     <insert id="insert">
+     	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+     		select seq_2.nextval from dual
+     	</selectKey>
+     	insert into t_user_2 (id,username,realname,password,sex)
+     	values (#{id},#{username},#{realname},#{password},#{sex})
+     </insert>
+     <select id="queryById" resultType="com.ems.entity.User">
+     	select username,password from 
+     	t_user_2 where username=#{0} and password=#{1}
+     </select>
+</mapper>
